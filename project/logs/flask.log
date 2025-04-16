@@ -3,3 +3,113 @@
 2025-03-27 21:26:29,904 [INFO] - Flask app started.
 2025-03-27 21:26:29,912 [WARNING] -  * Debugger is active!
 2025-03-27 21:26:29,916 [INFO] -  * Debugger PIN: 103-563-834
+2025-04-15 13:36:04,689 [INFO] - Flask app started.
+2025-04-15 13:36:04,784 [INFO] -  * Restarting with stat
+2025-04-15 13:37:52,449 [INFO] - Flask app started.
+2025-04-15 13:37:52,460 [INFO] -  * Restarting with stat
+2025-04-15 13:37:55,190 [INFO] - Flask app started.
+2025-04-15 13:37:55,199 [WARNING] -  * Debugger is active!
+2025-04-15 13:37:55,208 [INFO] -  * Debugger PIN: 128-030-579
+2025-04-15 13:51:30,299 [INFO] -  * Detected change in 'D:\\AI-Proctoring-System\\project\\app.py', reloading
+2025-04-15 13:51:31,320 [INFO] -  * Restarting with stat
+2025-04-15 13:51:49,123 [INFO] - Flask app started.
+2025-04-15 13:51:49,137 [INFO] -  * Restarting with stat
+2025-04-15 13:51:51,567 [INFO] - Flask app started.
+2025-04-15 13:51:51,575 [WARNING] -  * Debugger is active!
+2025-04-15 13:51:51,580 [INFO] -  * Debugger PIN: 128-030-579
+2025-04-15 14:01:23,560 [INFO] -  * Detected change in 'D:\\AI-Proctoring-System\\project\\backend\\__init__.py', reloading
+2025-04-15 14:01:23,933 [INFO] -  * Restarting with stat
+2025-04-15 14:01:37,698 [INFO] - Flask app started.
+2025-04-15 14:01:37,728 [INFO] -  * Restarting with stat
+2025-04-15 14:01:40,885 [INFO] - Flask app started.
+2025-04-15 14:01:40,893 [WARNING] -  * Debugger is active!
+2025-04-15 14:01:40,899 [INFO] -  * Debugger PIN: 128-030-579
+2025-04-15 14:11:43,735 [INFO] -  * Detected change in 'D:\\AI-Proctoring-System\\project\\backend\\routes.py', reloading
+2025-04-15 14:11:44,376 [INFO] -  * Restarting with stat
+2025-04-15 14:11:53,604 [INFO] - Flask app started.
+2025-04-15 14:11:53,620 [WARNING] -  * Debugger is active!
+2025-04-15 14:11:53,626 [INFO] -  * Debugger PIN: 128-030-579
+2025-04-15 14:24:39,997 [INFO] - Flask app started.
+2025-04-15 14:24:40,049 [INFO] -  * Restarting with stat
+2025-04-15 14:24:42,926 [INFO] - Flask app started.
+2025-04-15 14:24:42,935 [WARNING] -  * Debugger is active!
+2025-04-15 14:24:43,532 [INFO] -  * Debugger PIN: 128-030-579
+2025-04-15 14:51:34,721 [INFO] - Flask app started.
+2025-04-15 14:51:34,784 [INFO] - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+2025-04-15 14:51:34,784 [INFO] - [33mPress CTRL+C to quit[0m
+2025-04-15 14:52:17,086 [INFO] - Flask app started.
+2025-04-15 14:52:17,105 [INFO] -  * Restarting with stat
+2025-04-15 14:52:19,979 [INFO] - Flask app started.
+2025-04-15 14:52:19,989 [WARNING] -  * Debugger is active!
+2025-04-15 14:52:19,994 [INFO] -  * Debugger PIN: 128-030-579
+2025-04-15 18:43:28,092 [INFO] - \U0001f4cb Flask app is starting...
+2025-04-15 18:43:28,430 [WARNING] - \u26a0\ufe0f Proctoring modules failed to load: cannot import name 'detect_face' from 'backend.proctoring' (unknown location)
+2025-04-15 18:43:28,457 [WARNING] - \u26a0\ufe0f MAIL_USERNAME or MAIL_PASSWORD not set. Email features may fail.
+2025-04-15 18:43:28,482 [INFO] -  * Restarting with stat
+2025-04-15 18:43:31,490 [INFO] - \U0001f4cb Flask app is starting...
+2025-04-15 18:43:31,571 [WARNING] - \u26a0\ufe0f Proctoring modules failed to load: cannot import name 'detect_face' from 'backend.proctoring' (unknown location)
+2025-04-15 18:43:31,575 [WARNING] - \u26a0\ufe0f MAIL_USERNAME or MAIL_PASSWORD not set. Email features may fail.
+2025-04-15 18:43:31,583 [WARNING] -  * Debugger is active!
+2025-04-15 18:43:31,592 [INFO] -  * Debugger PIN: 128-030-579
+2025-04-15 19:39:25,486 [INFO] - \U0001f4cb Flask app is starting...
+2025-04-15 19:39:25,689 [WARNING] - \u26a0\ufe0f Proctoring modules failed to load: cannot import name 'detect_face' from 'backend.proctoring' (unknown location)
+2025-04-15 19:39:25,910 [WARNING] - \u26a0\ufe0f MAIL_USERNAME or MAIL_PASSWORD not set. Email features may fail.
+2025-04-15 19:39:25,926 [INFO] -  * Restarting with stat
+2025-04-15 19:39:28,617 [INFO] - \U0001f4cb Flask app is starting...
+2025-04-15 19:39:28,697 [WARNING] - \u26a0\ufe0f Proctoring modules failed to load: cannot import name 'detect_face' from 'backend.proctoring' (unknown location)
+2025-04-15 19:39:28,702 [WARNING] - \u26a0\ufe0f MAIL_USERNAME or MAIL_PASSWORD not set. Email features may fail.
+2025-04-15 19:39:28,711 [WARNING] -  * Debugger is active!
+2025-04-15 19:39:28,716 [INFO] -  * Debugger PIN: 128-030-579
+2025-04-15 20:01:14,968 [INFO] - \U0001f4cb Flask app is starting...
+2025-04-15 20:01:15,643 [WARNING] - \u26a0\ufe0f Proctoring modules failed to load: cannot import name 'detect_face' from 'backend.proctoring' (unknown location)
+2025-04-15 20:01:15,671 [WARNING] - \u26a0\ufe0f MAIL_USERNAME or MAIL_PASSWORD not set. Email features may fail.
+2025-04-15 20:01:15,734 [INFO] -  * Restarting with stat
+2025-04-15 20:01:19,075 [INFO] - \U0001f4cb Flask app is starting...
+2025-04-15 20:01:19,165 [WARNING] - \u26a0\ufe0f Proctoring modules failed to load: cannot import name 'detect_face' from 'backend.proctoring' (unknown location)
+2025-04-15 20:01:19,170 [WARNING] - \u26a0\ufe0f MAIL_USERNAME or MAIL_PASSWORD not set. Email features may fail.
+2025-04-15 20:01:19,180 [WARNING] -  * Debugger is active!
+2025-04-15 20:01:19,189 [INFO] -  * Debugger PIN: 128-030-579
+2025-04-15 20:14:28,049 [INFO] -  * Detected change in 'D:\\AI-Proctoring-System\\project\\backend\\proctoring\\video_recording.py', reloading
+2025-04-15 20:14:28,448 [INFO] -  * Restarting with stat
+2025-04-15 20:14:32,953 [INFO] - \U0001f4cb Flask app is starting...
+2025-04-15 20:14:33,030 [WARNING] - \u26a0\ufe0f Proctoring modules failed to load: cannot import name 'detect_face' from 'backend.proctoring' (unknown location)
+2025-04-15 20:14:33,033 [WARNING] - \u26a0\ufe0f MAIL_USERNAME or MAIL_PASSWORD not set. Email features may fail.
+2025-04-15 20:14:33,043 [WARNING] -  * Debugger is active!
+2025-04-15 20:14:33,048 [INFO] -  * Debugger PIN: 128-030-579
+2025-04-15 20:35:43,787 [INFO] - \U0001f4cb Flask app is starting...
+2025-04-15 20:35:44,100 [WARNING] - \u26a0\ufe0f Proctoring modules failed to load: cannot import name 'detect_face' from 'backend.proctoring' (unknown location)
+2025-04-15 20:35:44,170 [WARNING] - \u26a0\ufe0f MAIL_USERNAME or MAIL_PASSWORD not set. Email features may fail.
+2025-04-15 20:35:44,203 [INFO] -  * Restarting with stat
+2025-04-15 20:35:48,395 [INFO] - \U0001f4cb Flask app is starting...
+2025-04-15 20:35:48,517 [WARNING] - \u26a0\ufe0f Proctoring modules failed to load: cannot import name 'detect_face' from 'backend.proctoring' (unknown location)
+2025-04-15 20:35:48,523 [WARNING] - \u26a0\ufe0f MAIL_USERNAME or MAIL_PASSWORD not set. Email features may fail.
+2025-04-15 20:35:48,537 [WARNING] -  * Debugger is active!
+2025-04-15 20:35:48,574 [INFO] -  * Debugger PIN: 128-030-579
+2025-04-15 23:21:46,848 [INFO] - \U0001f680 Starting Flask app...
+2025-04-15 23:21:47,405 [WARNING] - \u26a0\ufe0f Failed to load proctoring modules: No module named 'proctoring'
+2025-04-15 23:21:47,444 [WARNING] - \u26a0\ufe0f MAIL_USERNAME or MAIL_PASSWORD is not set. Email functionality may not work.
+2025-04-15 23:21:47,556 [INFO] -  * Restarting with stat
+2025-04-15 23:21:50,456 [INFO] - \U0001f680 Starting Flask app...
+2025-04-15 23:21:50,533 [WARNING] - \u26a0\ufe0f Failed to load proctoring modules: No module named 'proctoring'
+2025-04-15 23:21:50,537 [WARNING] - \u26a0\ufe0f MAIL_USERNAME or MAIL_PASSWORD is not set. Email functionality may not work.
+2025-04-15 23:21:50,546 [WARNING] -  * Debugger is active!
+2025-04-15 23:21:50,553 [INFO] -  * Debugger PIN: 128-030-579
+2025-04-16 14:19:47,905 [INFO] - \U0001f680 Starting Flask app...
+2025-04-16 14:19:48,153 [WARNING] - \u26a0\ufe0f Failed to load proctoring modules: No module named 'proctoring'
+2025-04-16 14:19:48,879 [WARNING] - \u26a0\ufe0f MAIL_USERNAME or MAIL_PASSWORD is not set. Email functionality may not work.
+2025-04-16 14:19:48,919 [INFO] -  * Restarting with stat
+2025-04-16 14:19:52,014 [INFO] - \U0001f680 Starting Flask app...
+2025-04-16 14:19:52,110 [WARNING] - \u26a0\ufe0f Failed to load proctoring modules: No module named 'proctoring'
+2025-04-16 14:19:52,120 [WARNING] - \u26a0\ufe0f MAIL_USERNAME or MAIL_PASSWORD is not set. Email functionality may not work.
+2025-04-16 14:19:52,130 [WARNING] -  * Debugger is active!
+2025-04-16 14:19:52,147 [INFO] -  * Debugger PIN: 128-030-579
+2025-04-16 20:02:46,722 [INFO] - \U0001f680 Starting Flask app...
+2025-04-16 20:02:47,083 [WARNING] - \u26a0\ufe0f Failed to load proctoring modules: No module named 'proctoring'
+2025-04-16 20:02:47,114 [WARNING] - \u26a0\ufe0f MAIL_USERNAME or MAIL_PASSWORD is not set. Email functionality may not work.
+2025-04-16 20:02:47,114 [INFO] -  * Restarting with stat
+2025-04-16 20:02:52,123 [INFO] - \U0001f680 Starting Flask app...
+2025-04-16 20:02:52,250 [WARNING] - \u26a0\ufe0f Failed to load proctoring modules: No module named 'proctoring'
+2025-04-16 20:02:52,254 [WARNING] - \u26a0\ufe0f MAIL_USERNAME or MAIL_PASSWORD is not set. Email functionality may not work.
+2025-04-16 20:02:52,255 [WARNING] -  * Debugger is active!
+2025-04-16 20:02:52,262 [INFO] -  * Debugger PIN: 174-244-585

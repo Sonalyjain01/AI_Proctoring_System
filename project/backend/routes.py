@@ -154,3 +154,15 @@ def get_live_students():
     student_list = [{"user_id": session.user_id, "login_time": session.login_time} for session in active_students]
 
     return jsonify(student_list)
+
+@routes.route('/endpoints', methods=['GET'])
+def api_list():
+    return jsonify({
+        "users": "/api/users",
+        "exams": "/api/exams",
+        "logs": "/api/proctoring_logs",
+        "videos": "/api/video_records",
+        "sessions": "/api/sessions",
+        "live_students": "/api/live_students"
+    })
+

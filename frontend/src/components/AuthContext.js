@@ -1,5 +1,5 @@
 import { createContext, useEffect, useState } from "react";
-import jwtDecode from "jwt-decode"; //  Decode JWT token
+import jwtDecode from "jwt-decode";
 
 export const AuthContext = createContext();
 
@@ -13,25 +13,24 @@ export const AuthProvider = ({ children }) => {
             try {
                 const decoded = jwtDecode(token);
                 const expiry = decoded.exp * 1000;
-                
+
                 if (Date.now() > expiry) {
-                    console.log("Token expired. Logging out...");
+                    console.log("⚠️ Token expired. Clearing session.");
                     localStorage.clear();
                     return null;
                 }
 
                 return { token, role, email };
             } catch (error) {
-                console.error("Invalid token:", error);
+                console.error("❌ Invalid token:", error);
                 localStorage.clear();
                 return null;
             }
-        } else {
-            return null;
         }
+        return null;
     });
 
-    //  Save user data on login
+    // 🔐 Handle login
     const login = (token, role, email) => {
         localStorage.setItem("token", token);
         localStorage.setItem("role", role);
@@ -39,25 +38,35 @@ export const AuthProvider = ({ children }) => {
         setAuth({ token, role, email });
     };
 
-    //  Clear storage on logout
+    // 🔒 Handle logout
     const logout = () => {
         localStorage.clear();
         setAuth(null);
     };
 
-    //  Check token validity when app reloads
+    // 🧠 Watch token expiration (on app load)
     useEffect(() => {
         const token = localStorage.getItem("token");
+
         if (token) {
             try {
                 const decoded = jwtDecode(token);
                 const expiry = decoded.exp * 1000;
-                if (Date.now() > expiry) {
-                    console.log("Session expired. Logging out...");
+                const timeRemaining = expiry - Date.now();
+
+                if (timeRemaining <= 0) {
                     logout();
+                } else {
+                    // Optional: Auto-logout when token expires
+                    const timeout = setTimeout(() => {
+                        console.log("⏰ Session expired automatically.");
+                        logout();
+                    }, timeRemaining);
+
+                    return () => clearTimeout(timeout);
                 }
             } catch (error) {
-                console.error("Invalid token:", error);
+                console.error("Error checking token:", error);
                 logout();
             }
         }

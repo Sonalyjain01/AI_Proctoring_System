@@ -4,27 +4,27 @@ from datetime import datetime
 import sqlalchemy.types as types
 import pickle
 
-# ✅ Custom Data Type for Face Encodings (Stores as Pickle)
+# ✅ Custom Pickle Type for Face Encodings
 class PickleType(types.TypeDecorator):
     impl = types.LargeBinary
 
     def process_bind_param(self, value, dialect):
-        return pickle.dumps(value) if value is not None else None
+        return pickle.dumps(value) if value else None
 
     def process_result_value(self, value, dialect):
-        return pickle.loads(value) if value is not None else None
+        return pickle.loads(value) if value else None
 
-# ✅ User Model (Stores Admin & Student Information)
+# ✅ User Table
 class User(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     email = db.Column(db.String(255), unique=True, nullable=False)
     password_hash = db.Column(db.String(255), nullable=False)
     is_locked = db.Column(db.Boolean, default=False)
-    role = db.Column(db.String(20), nullable=False, default="student")  # 'admin' or 'student'
+    role = db.Column(db.String(20), default="student")  # admin | student
 
     @property
     def password(self):
-        raise AttributeError('Password is not a readable attribute.')
+        raise AttributeError("Password is not readable.")
 
     @password.setter
     def password(self, password):
@@ -33,30 +33,30 @@ class User(db.Model):
     def check_password(self, password):
         return check_password_hash(self.password_hash, password)
 
-# ✅ Exam Model (Stores Exam Details)
+# ✅ Exam Schedule
 class Exam(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     subject = db.Column(db.String(100), nullable=False)
     start_time = db.Column(db.DateTime, nullable=False)
     end_time = db.Column(db.DateTime, nullable=False)
-    total_duration = db.Column(db.Integer, nullable=False)  # Duration in minutes
+    total_duration = db.Column(db.Integer, nullable=False)  # in minutes
     created_at = db.Column(db.DateTime, default=datetime.utcnow)
 
-# ✅ Proctoring Logs (Stores Cheating Alerts)
+# ✅ Logs Detected by Proctoring AI
 class ProctoringLog(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
-    event_type = db.Column(db.String(255), nullable=False)  # Example: "Face Not Detected"
+    event_type = db.Column(db.String(255), nullable=False)
     event_details = db.Column(db.Text)
     detected_at = db.Column(db.DateTime, default=datetime.utcnow)
 
-# ✅ Face Recognition Data Storage
+# ✅ Stored Encodings for Face Recognition
 class FaceRecognition(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
-    face_encoding = db.Column(PickleType, nullable=False)  # Stores face encoding as PickleType
+    face_encoding = db.Column(PickleType, nullable=False)
 
-# ✅ Video Recording Metadata (Stores Video File Info)
+# ✅ Video Upload Records
 class VideoRecord(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
@@ -65,32 +65,32 @@ class VideoRecord(db.Model):
     uploaded_to_cloud = db.Column(db.Boolean, default=False)
     timestamp = db.Column(db.DateTime, default=datetime.utcnow)
 
-# ✅ Session Token Management (Handles User Sessions)
+# ✅ Login Session Tracking
 class Session(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
     login_time = db.Column(db.DateTime, default=datetime.utcnow)
-    logout_time = db.Column(db.DateTime, nullable=True)
+    logout_time = db.Column(db.DateTime)
     is_active = db.Column(db.Boolean, default=True)
 
     def logout(self):
         self.is_active = False
         self.logout_time = datetime.utcnow()
 
-# ✅ OTP Storage (For Multi-Factor Authentication)
+# ✅ OTP Handling for MFA
 class OTPStorage(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     email = db.Column(db.String(255), db.ForeignKey('user.email'), nullable=False, unique=True)
-    otp = db.Column(db.String(6), nullable=False)  # 6-digit OTP
-    expires_at = db.Column(db.DateTime, nullable=False)  # Expiry Time (5 mins)
+    otp = db.Column(db.String(6), nullable=False)
+    expires_at = db.Column(db.DateTime, nullable=False)
 
-# ✅ Blacklisted JWT Tokens (For Secure Logout Handling)
+# ✅ JWT Token Blacklist
 class BlacklistedToken(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    jti = db.Column(db.String(255), nullable=False, unique=True)  # Unique JWT Token ID
+    jti = db.Column(db.String(255), nullable=False, unique=True)
     blacklisted_at = db.Column(db.DateTime, default=datetime.utcnow)
 
-# ✅ Initialize Database
+# ✅ Manual DB Init
 def init_db(app):
     db.init_app(app)
     with app.app_context():

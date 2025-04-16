@@ -7,23 +7,20 @@ const SERVER_URL = process.env.REACT_APP_SERVER_URL || "http://localhost:5000";
 
 const AdminDashboard = () => {
     const { auth } = useContext(AuthContext);
-
-    // State hooks
     const [logs, setLogs] = useState([]);
     const [users, setUsers] = useState([]);
     const [statusMessage, setStatusMessage] = useState("");
     const [errorMessage, setErrorMessage] = useState("");
 
-    // Redirect or deny access if not authenticated
-    if (!auth || !auth.token) {
-        return <div className="text-center text-red-500">Please login as Admin</div>;
+    // 🔐 Access control
+    if (!auth?.token || auth.role !== "admin") {
+        return <div className="text-center text-red-600 mt-10">⛔ Access Denied. Please login as Admin.</div>;
     }
 
-    // Fetch logs and users when component loads and every 5 seconds
+    // 🔁 Fetch logs & users every 5 seconds
     useEffect(() => {
         fetchLogs();
         fetchUsers();
-
         const interval = setInterval(() => {
             fetchLogs();
             fetchUsers();
@@ -32,101 +29,92 @@ const AdminDashboard = () => {
         return () => clearInterval(interval);
     }, []);
 
-    // Fetch logs from Flask backend
     const fetchLogs = async () => {
         try {
-            const response = await fetch(`${SERVER_URL}/api/proctoring_logs`, {
-                headers: {
-                    Authorization: `Bearer ${auth.token}`,
-                },
+            const res = await fetch(`${SERVER_URL}/api/proctoring_logs`, {
+                headers: { Authorization: `Bearer ${auth.token}` },
             });
-            if (!response.ok) throw new Error(`Failed to fetch logs`);
-            const data = await response.json();
-            setLogs(data.reverse()); //  Show latest logs first
-            setErrorMessage(""); // Clear previous errors
-        } catch (error) {
-            console.error("Error fetching logs:", error);
+            if (!res.ok) throw new Error("Failed to fetch logs");
+            const data = await res.json();
+            setLogs(data.reverse());
+            setErrorMessage("");
+        } catch (err) {
+            console.error(err);
             setErrorMessage("Failed to load logs.");
         }
     };
 
-    // Fetch users from Flask backend
     const fetchUsers = async () => {
         try {
-            const response = await fetch(`${SERVER_URL}/api/users`, {
-                headers: {
-                    Authorization: `Bearer ${auth.token}`,
-                },
+            const res = await fetch(`${SERVER_URL}/api/users`, {
+                headers: { Authorization: `Bearer ${auth.token}` },
             });
-            if (!response.ok) throw new Error(`Failed to fetch users`);
-            const data = await response.json();
-            setUsers(data);
-            setErrorMessage(""); // Clear previous errors
-        } catch (error) {
-            console.error("Error fetching users:", error);
+            if (!res.ok) throw new Error("Failed to fetch users");
+            const data = await res.json();
+            setUsers(data.users || []);
+            setErrorMessage("");
+        } catch (err) {
+            console.error(err);
             setErrorMessage("Failed to load users.");
         }
     };
 
-    // Handle user unlock action
     const handleUnlockUser = async (userId) => {
         try {
-            const response = await fetch(`${SERVER_URL}/api/unlock_user/${userId}`, {
+            const res = await fetch(`${SERVER_URL}/api/unlock_user/${userId}`, {
                 method: "POST",
-                headers: {
-                    Authorization: `Bearer ${auth.token}`,
-                },
+                headers: { Authorization: `Bearer ${auth.token}` },
             });
-            if (!response.ok) throw new Error(`Failed to unlock user`);
+            if (!res.ok) throw new Error("Failed to unlock user");
 
-            const data = await response.json();
+            const data = await res.json();
             setStatusMessage(data.message);
-            fetchUsers(); // Refresh user list after unlocking
-            toast.success("User unlocked successfully!"); //  Show success message
-        } catch (error) {
-            console.error("Error unlocking user:", error);
+            fetchUsers();
+            toast.success("✅ User unlocked!");
+        } catch (err) {
+            console.error(err);
             setErrorMessage("Failed to unlock user.");
-            toast.error("Failed to unlock user!"); //  Show error message
+            toast.error("❌ Could not unlock user.");
         }
     };
 
     return (
-        <div className="p-6">
-            <h1 className="text-3xl font-bold mb-6 text-center text-blue-600">Admin Dashboard</h1>
+        <div className="p-6 max-w-4xl mx-auto">
+            <h1 className="text-3xl font-bold mb-6 text-center text-blue-600">👮 Admin Dashboard</h1>
 
-            {/*  Error Message */}
             {errorMessage && (
-                <p className="mb-4 text-red-500 text-center">{errorMessage}</p>
+                <div className="mb-4 text-red-500 text-center">{errorMessage}</div>
             )}
 
-            {/* Suspicious Activity Logs */}
+            {/* 🔍 Suspicious Activity Logs */}
             <div className="mb-6">
-                <h2 className="text-xl font-semibold mb-3 text-gray-700">Suspicious Activity Logs</h2>
-                <div className="border rounded p-3 bg-white shadow-md">
+                <h2 className="text-xl font-semibold mb-2 text-gray-800">Suspicious Activity Logs</h2>
+                <div className="bg-white rounded shadow p-4 border">
                     {logs.length > 0 ? (
-                        <ul className="list-disc pl-4">
+                        <ul className="space-y-2">
                             {logs.map((log, index) => (
-                                <li key={index} className="text-gray-800">
-                                    <strong>{log.event_type}</strong> - {log.details}
+                                <li key={index} className="text-sm text-gray-700">
+                                    <strong>{log.event_type}</strong>: {log.details}
                                 </li>
                             ))}
                         </ul>
                     ) : (
-                        <p className="text-gray-500">No logs available</p>
+                        <p className="text-gray-500">No logs available.</p>
                     )}
                 </div>
             </div>
 
-            {/*  User Management */}
+            {/* 👥 User Management */}
             <div>
-                <h2 className="text-xl font-semibold mb-3 text-gray-700">User Management</h2>
-                <div className="border rounded p-3 bg-white shadow-md">
+                <h2 className="text-xl font-semibold mb-2 text-gray-800">User Management</h2>
+                <div className="bg-white rounded shadow p-4 border">
                     {users.length > 0 ? (
-                        <ul className="list-none">
+                        <ul className="divide-y">
                             {users.map((user) => (
-                                <li key={user.id} className="flex justify-between items-center border-b py-2">
+                                <li key={user.id} className="py-2 flex justify-between items-center text-sm">
                                     <span>
-                                        {user.email} -{" "}
+                                        <span className="font-medium">{user.email}</span>{" "}
+                                        -{" "}
                                         {user.is_locked ? (
                                             <span className="text-red-500">Locked</span>
                                         ) : (
@@ -135,8 +123,8 @@ const AdminDashboard = () => {
                                     </span>
                                     {user.is_locked && (
                                         <button
-                                            className="bg-blue-500 text-white px-3 py-1 rounded"
                                             onClick={() => handleUnlockUser(user.id)}
+                                            className="bg-blue-500 hover:bg-blue-600 text-white px-3 py-1 rounded text-sm"
                                         >
                                             Unlock
                                         </button>
@@ -145,7 +133,7 @@ const AdminDashboard = () => {
                             ))}
                         </ul>
                     ) : (
-                        <p className="text-gray-500">No users available</p>
+                        <p className="text-gray-500">No users available.</p>
                     )}
                 </div>
                 {statusMessage && (

@@ -1,24 +1,23 @@
 import React from "react";
-import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route, Navigate, useLocation } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import { AuthProvider, AuthContext } from "./components/AuthContext";
+
 import Login from "./components/Login";
 import Register from "./components/Register";
 import AdminDashboard from "./components/AdminDashboard";
 import ProctoringDashboard from "./components/ProctoringDashboard";
+import { AuthProvider, AuthContext } from "./components/AuthContext";
 
-const ProtectedRoute = ({ element, roles }) => {
-    return (
-        <AuthContext.Consumer>
-            {({ auth }) =>
-                auth && roles.includes(auth.role) ? (
-                    element
-                ) : (
-                    <Navigate to="/login" />
-                )
-            }
-        </AuthContext.Consumer>
+// 🔐 ProtectedRoute component with role check
+const ProtectedRoute = ({ Component, roles }) => {
+    const { auth } = React.useContext(AuthContext);
+    const location = useLocation();
+
+    return auth && roles.includes(auth.role) ? (
+        <Component />
+    ) : (
+        <Navigate to="/login" state={{ from: location }} replace />
     );
 };
 
@@ -30,9 +29,15 @@ const App = () => {
                 <Routes>
                     <Route path="/login" element={<Login />} />
                     <Route path="/register" element={<Register />} />
-                    <Route path="/admin" element={<ProtectedRoute element={<AdminDashboard />} roles={["admin"]} />} />
-                    <Route path="/dashboard" element={<ProtectedRoute element={<ProctoringDashboard />} roles={["student", "admin"]} />} />
-                    <Route path="*" element={<Navigate to="/login" />} />
+                    <Route
+                        path="/admin"
+                        element={<ProtectedRoute Component={AdminDashboard} roles={["admin"]} />}
+                    />
+                    <Route
+                        path="/dashboard"
+                        element={<ProtectedRoute Component={ProctoringDashboard} roles={["admin", "student"]} />}
+                    />
+                    <Route path="*" element={<Navigate to="/login" replace />} />
                 </Routes>
             </Router>
         </AuthProvider>
